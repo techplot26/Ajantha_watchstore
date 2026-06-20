@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mb-4">Checkout</h1>
+
+{% if completed %}
+<div class="alert alert-success">
+    <h4>Thank you for your order, {{ order.customer_name }}!</h4>
+    <p>Your order will be shipped to: {{ order.customer_address }}</p>
+</div>
+<a href="{{ url_for('home') }}" class="btn btn-primary">Continue Shopping</a>
+{% else %}
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.customer_name.label(class="form-label") }}
+        {{ form.customer_name(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.customer_address.label(class="form-label") }}
+        {{ form.customer_address(class="form-control") }}
+    </div>
+    {{ form.submit(class="btn btn-success") }}
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Your Shopping Basket</h2>
+
+{% if products %}
+<table class="table">
+  <tr>
+    <th>Product</th>
+    <th>Price</th>
+    <th>Action</th>
+  </tr>
+  {% for product in products %}
+  <tr>
+    <td>{{ product.brand }} - {{ product.model }}</td>
+    <td>${{ product.price }}</td>
+    <td>
+      <a href="{{ url_for('remove_from_basket', product_id=product.id) }}"
+         class="btn btn-danger btn-sm">Remove</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<a href="{{ url_for('checkout') }}" class="btn btn-primary">Checkout</a>
+
+{% else %}
+<p>Your basket is empty.</p>
+{% endif %}
+
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Continue Shopping</a>
+
+{% endblock %}
